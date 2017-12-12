@@ -44,7 +44,9 @@ class Transfer
     
     def order_transfer_by_agent
         # Pay commission once
-        @origin_bank.withdraw(5, @origin_account)
+        unless @origin_bank == @destination_bank
+            @origin_bank.withdraw(5, @origin_account)
+        end
         if @quantity > 1000
             transfers_number = @quantity / 1000
             # Order transfers each 1000 to 1000
